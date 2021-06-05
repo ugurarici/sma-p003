@@ -30,10 +30,3 @@ $articles = [
         "content" => "7th Article's Content, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui mollitia nihil ullam voluptatum minus praesentium commodi porro saepe amet dolorem facere, eos excepturi. Odio quia aspernatur maiores sint? Exercitationem, repudiandae."
     ],
 ];
-
-// function ornek()
-// {
-//     return "";
-// }
-
-print_r("Data çekildi");
