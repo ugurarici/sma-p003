@@ -1,22 +1,10 @@
 <?php
-$articles = [
-    [
-        "title" => "1st Article's Title",
-        "content" => "1st Article's Content, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui mollitia nihil ullam voluptatum minus praesentium commodi porro saepe amet dolorem facere, eos excepturi. Odio quia aspernatur maiores sint? Exercitationem, repudiandae."
-    ],
-    [
-        "title" => "2nd Article's Title",
-        "content" => "2nd Article's Content, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui mollitia nihil ullam voluptatum minus praesentium commodi porro saepe amet dolorem facere, eos excepturi. Odio quia aspernatur maiores sint? Exercitationem, repudiandae."
-    ],
-    [
-        "title" => "3rd Article's Title",
-        "content" => "3rd Article's Content, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui mollitia nihil ullam voluptatum minus praesentium commodi porro saepe amet dolorem facere, eos excepturi. Odio quia aspernatur maiores sint? Exercitationem, repudiandae."
-    ],
-    [
-        "title" => "4th Article's Title",
-        "content" => "4th Article's Content, Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui mollitia nihil ullam voluptatum minus praesentium commodi porro saepe amet dolorem facere, eos excepturi. Odio quia aspernatur maiores sint? Exercitationem, repudiandae."
-    ],
-];
+require "data.php";
+
+if (!isset($_GET['id']) || !isset($articles[$_GET['id']])) {
+    header("Location: index.php");
+    die();
+}
 
 $key = $_GET["id"];
 
