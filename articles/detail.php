@@ -14,21 +14,23 @@ $article = $articles[$key];
 $documentTitle = $article['title'];
 include "header.php";
 ?>
-<div class="row">
-    <div class="col-md-3  my-2">
-        <div class="list-group">
-            <?php foreach ($articles as $key => $item) : ?>
-                <a href="detail.php?id=<?php echo $key ?>" class="list-group-item list-group-item-action <?php if ($_GET['id'] == $key) echo "active" ?>">
-                    <?php echo $item['title'] ?>
-                </a>
-            <?php endforeach; ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3  my-2">
+            <div class="list-group">
+                <?php foreach ($articles as $key => $item) : ?>
+                    <a href="detail.php?id=<?php echo $key ?>" class="list-group-item list-group-item-action <?php if ($_GET['id'] == $key) echo "active" ?>">
+                        <?php echo $item['title'] ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
-    <div class="col-md-9  my-2">
-        <div class="card">
-            <div class="card-body">
-                <h1><?php echo $article["title"]; ?></h1>
-                <p><?php echo $article["content"]; ?></p>
+        <div class="col-md-9  my-2">
+            <div class="card">
+                <div class="card-body">
+                    <h1><?php echo $article["title"]; ?></h1>
+                    <p><?php echo $article["content"]; ?></p>
+                </div>
             </div>
         </div>
     </div>

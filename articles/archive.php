@@ -2,5 +2,7 @@
 $documentTitle = "Arşiv";
 include "header.php";
 ?>
-bu da içerik olsun
+<div class="container">
+    bu da içerik olsun
+</div>
 <?php include "footer.php"; ?>
