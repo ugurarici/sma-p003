@@ -6,7 +6,7 @@ require "data.php";
 
 $mainColor = "black";
 $mainBackGroundColor = "white";
-$selectedArticleTitle = $articles[0]['title'];
+// $selectedArticleTitle = $articles[0]['title'];
 
 include "theme.php";
 //  PHP tanımları bitti, görsel kısma başlayalım

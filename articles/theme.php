@@ -5,4 +5,4 @@
 require_once "data.php";
 
 $mainBackGroundColor = "#F0F";
-$selectedArticleTitle = $articles[2]['title'];
+// $selectedArticleTitle = $articles[2]['title'];
