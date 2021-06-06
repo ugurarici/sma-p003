@@ -6,9 +6,9 @@ if (!isset($_GET['id']) || !isset($articles[$_GET['id']])) {
     die();
 }
 
-$key = $_GET["id"];
+$articleId = $_GET["id"];
 
-$article = $articles[$key];
+$article = $articles[$articleId];
 ?>
 <?php
 $documentTitle = $article['title'];
@@ -30,6 +30,8 @@ include "header.php";
                 <div class="card-body">
                     <h1><?php echo $article["title"]; ?></h1>
                     <p><?php echo $article["content"]; ?></p>
+                    <hr>
+                    <a href="deletearticle.php?id=<?= $articleId ?>" class="btn btn-outline-danger">Delete</a>
                 </div>
             </div>
         </div>
