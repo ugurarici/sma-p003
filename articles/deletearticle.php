@@ -6,6 +6,9 @@ require "data.php";
 $articleIndexToDelete = $_GET['id'];
 unset($articles[$articleIndexToDelete]);
 
+//  aradan bir index kaybolduğu için diziyi reindex işlemine sokuyoruz
+$articles = array_values($articles);
+
 //  articles dizisinin yeni halini JSON'a çeviriyoruz
 $articlesJson = json_encode($articles);
 
