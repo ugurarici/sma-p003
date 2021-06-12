@@ -31,6 +31,7 @@ include "header.php";
                     <h1><?php echo $article["title"]; ?></h1>
                     <p><?php echo $article["content"]; ?></p>
                     <hr>
+                    <a href="editarticle.php?id=<?= $articleId ?>" class="btn btn-outline-info">Edit</a>
                     <a href="deletearticle.php?id=<?= $articleId ?>" class="btn btn-outline-danger">Delete</a>
                 </div>
             </div>
