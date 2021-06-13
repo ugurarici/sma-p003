@@ -12,7 +12,16 @@ if (!isset($documentTitle)) $documentTitle = "Articles";
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <?php
+    $baseFontSize = 16;
+    if (isset($_COOKIE['base-font-size'])) $baseFontSize = $_COOKIE['base-font-size'];
+    ?>
+    <style>
+        :root {
+            font-size: <?= $baseFontSize ?>px;
+        }
+    </style>
     <title><?= $documentTitle; ?></title>
 </head>
 
@@ -51,10 +60,16 @@ if (!isset($documentTitle)) $documentTitle = "Articles";
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="d-flex">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="setFontSize.php?dir=up" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-up-circle-fill"></i>
+                        </a>
+                        <a href="setFontSize.php?dir=down" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-down-circle-fill"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
