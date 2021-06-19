@@ -1,5 +1,10 @@
 <?php
-require "data.php";
+require "init.php";
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    die();
+}
 
 if (!isset($_GET['id']) || !isset($articles[$_GET['id']])) {
     header("Location: index.php");

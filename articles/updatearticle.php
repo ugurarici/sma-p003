@@ -1,6 +1,11 @@
 <?php
 //  uygulamanın mevcut verisine erişimimiz olmalı
-require "data.php";
+require "init.php";
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    die();
+}
 
 if (!isset($_POST['id']) || !isset($articles[$_POST['id']])) {
     header("Location: index.php");

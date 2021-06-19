@@ -1,15 +1,6 @@
 <?php
 //   bir dosyanın bağımlı olduğu diğer php dosyalarını yorumlamaya dahil etmek için require kullanıyoruz, bu dosya bulunmazsa sayfa fatal error vererek çalışmayı durduracaktır
-require "data.php";
-
-//  bir dosyanın içine çekmek istediğimiz ancak bulunamazsa da sayfanın çalışmasını engellemeyecek dosyaları include ile çekebiliriz, include ile çekmeye çalıştığımız dosyaya erişilemezse sayfanın çalışmasını durduracak bir fatal error değil, yalnızca uyarı basılır ve kalan kısım yorumlanmaya devam eder
-
-$mainColor = "black";
-$mainBackGroundColor = "white";
-// $selectedArticleTitle = $articles[0]['title'];
-
-include "theme.php";
-//  PHP tanımları bitti, görsel kısma başlayalım
+require "init.php";
 ?>
 <?php
 include "header.php";

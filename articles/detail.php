@@ -1,5 +1,5 @@
 <?php
-require "data.php";
+require "init.php";
 
 if (!isset($_GET['id']) || !isset($articles[$_GET['id']])) {
     header("Location: index.php");
@@ -30,9 +30,11 @@ include "header.php";
                 <div class="card-body">
                     <h1><?php echo $article["title"]; ?></h1>
                     <p><?php echo $article["content"]; ?></p>
-                    <hr>
-                    <a href="editarticle.php?id=<?= $articleId ?>" class="btn btn-outline-info">Edit</a>
-                    <a href="deletearticle.php?id=<?= $articleId ?>" class="btn btn-outline-danger">Delete</a>
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <hr>
+                        <a href="editarticle.php?id=<?= $articleId ?>" class="btn btn-outline-info">Edit</a>
+                        <a href="deletearticle.php?id=<?= $articleId ?>" class="btn btn-outline-danger">Delete</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

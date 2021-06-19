@@ -40,25 +40,11 @@ if (!isset($documentTitle)) $documentTitle = "Articles";
                     <li class="nav-item">
                         <a class="nav-link" href="random.php">Random Article</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="newarticle.php">Create New Article</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="newarticle.php">Create New Article</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <div class="d-flex">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -69,6 +55,11 @@ if (!isset($documentTitle)) $documentTitle = "Articles";
                             <i class="bi bi-arrow-down-circle-fill"></i>
                         </a>
                     </div>
+                    <?php if (!isset($_SESSION['username'])) : ?>
+                        <a href="login.php" class="btn btn-primary ms-2">Login</a>
+                    <?php else : ?>
+                        <a href="logout.php" class="btn btn-outline-success ms-2">Logout: <?= $_SESSION['username'] ?></a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

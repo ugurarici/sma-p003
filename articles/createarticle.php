@@ -1,6 +1,11 @@
 <?php
 //  uygulamanın mevcut verisine erişimimiz olmalı
-require "data.php";
+require "init.php";
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    die();
+}
 
 //  articles dizisine yeni bir eleman ekliyoruz
 $articles[] = [

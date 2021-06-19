@@ -1,3 +1,12 @@
+<?php
+require "init.php";
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    die();
+}
+
+?>
 <?php include "header.php"; ?>
 <div class="container">
     <form action="createarticle.php" method="post">
