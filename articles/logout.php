@@ -1,5 +1,5 @@
 <?php
-require "init.php";
+require "inc/init.php";
 
 redirectIfNotLoggedIn();
 

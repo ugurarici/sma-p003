@@ -1,6 +1,6 @@
 <?php
 //  uygulamanın mevcut verisine erişimimiz olmalı
-require "init.php";
+require "inc/init.php";
 
 redirectIfNotLoggedIn();
 
