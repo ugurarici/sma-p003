@@ -5,10 +5,7 @@ require "init.php";
 //  giriş sayfasında önce zaten bir kullanıcı girişi var mı diye bakalım
 //  giriş yapılındıysa burada işi yok, ana sayfaya gitsin
 //  çok istiyorsa önce çıkış yapıp sonra öyle gelsin
-if (isset($_SESSION['username'])) {
-    header("Location: index.php");
-    die();
-}
+redirectIfLoggedIn();
 
 //  bu sayfaya işleme konulması için POST ile kullanıcı adı ve parola geldiyse
 //  bu verileri kullanarak giriş işlemine çabalanmalı

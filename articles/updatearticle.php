@@ -2,10 +2,7 @@
 //  uygulamanın mevcut verisine erişimimiz olmalı
 require "init.php";
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    die();
-}
+redirectIfNotLoggedIn();
 
 if (!isset($_POST['id']) || !isset($articles[$_POST['id']])) {
     header("Location: index.php");

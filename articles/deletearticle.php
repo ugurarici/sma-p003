@@ -2,10 +2,7 @@
 //  uygulamanın mevcut verisine erişimimiz olmalı
 require "init.php";
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    die();
-}
+redirectIfNotLoggedIn();
 
 //  articles dizisinden istenen elemanı sileceğiz
 $articleIndexToDelete = $_GET['id'];

@@ -1,10 +1,7 @@
 <?php
 require "init.php";
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    die();
-}
+redirectIfNotLoggedIn();
 
 ?>
 <?php include "header.php"; ?>
