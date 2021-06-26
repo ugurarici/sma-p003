@@ -51,8 +51,8 @@ var_dump($deletedRowCount);
 //  kullanıcıdan alınan veri, sorguya doğrudan dahil edilirse ciddi güvenlik açıklarına sebep olabilir
 
 // $id = $_GET['id']; // 3 -> SELECT * FROM articles WHERE id = 3
-// 3; TRUNCATE articles; -> SELECT * FROM articles WHERE id = 3; TRUNCATE articles;
-// https://en.wikipedia.org/wiki/SQL_injection
+// // 3; TRUNCATE articles; -> SELECT * FROM articles WHERE id = 3; TRUNCATE articles;
+// // https://en.wikipedia.org/wiki/SQL_injection
 // $hop = $connection->query("SELECT * FROM articles WHERE id = " . $id)->fetchAll(PDO::FETCH_ASSOC);
 // var_dump($hop);
 
@@ -66,12 +66,26 @@ $insertArticleQueryBase = $connection->prepare("INSERT INTO articles (title, con
 
 //  ardından hazırlanmış bu sorguyu ->execute() ile çalıştırırken, soru işaretleri ile yerleri belirlenmiş alanlara gelecek değerleri dizi içinde sırayla gönderiyoruz
 
-$title = 'başlık';
-$content = "içerik'); TRUNCATE articles;(";
+$burayaBaslikGelsin = 'başlık';
+$burayaIcerikGelsin = "içerik'); TRUNCATE articles;(";
 
 $insertResult = $insertArticleQueryBase->execute([
-    $title,
-    $content
+    $burayaBaslikGelsin,
+    $burayaIcerikGelsin
 ]);
 
 var_dump($insertResult);
+
+//  preapare() ve execute() işlemleri esnasında, execute içine parametre olarak yollanan dizide
+//      SQL sorgusunun paramatrelerini isimlendirerek, indisler üzerinden eşleşmesini sağlayabiliriz
+//  böylece kaç soru işareti vardı, hangi sırayla yazılmışlardı, diziyi de ona göre dizelim diye uğraşmaya gerek kalmaz
+
+$updateArticleQueryBase = $connection->prepare("UPDATE articles SET title=:baslik, content=:icerik WHERE id = :kimlik");
+
+$updateResult = $updateArticleQueryBase->execute([
+    'icerik' => 'yepyeni içerik',
+    'kimlik' => 4,
+    'baslik' => 'yepyeni başlık',
+]);
+
+var_dump($updateResult);
