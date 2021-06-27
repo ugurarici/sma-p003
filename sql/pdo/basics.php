@@ -50,11 +50,11 @@ var_dump($deletedRowCount);
 
 //  kullanıcıdan alınan veri, sorguya doğrudan dahil edilirse ciddi güvenlik açıklarına sebep olabilir
 
-// $id = $_GET['id']; // 3 -> SELECT * FROM articles WHERE id = 3
-// // 3; TRUNCATE articles; -> SELECT * FROM articles WHERE id = 3; TRUNCATE articles;
-// // https://en.wikipedia.org/wiki/SQL_injection
-// $hop = $connection->query("SELECT * FROM articles WHERE id = " . $id)->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($hop);
+$id = $_GET['id']; // 3 -> SELECT * FROM articles WHERE id = 3
+// 3; TRUNCATE articles; -> SELECT * FROM articles WHERE id = 3; TRUNCATE articles;
+// https://en.wikipedia.org/wiki/SQL_injection
+$hop = $connection->query("SELECT * FROM articles WHERE id = " . $id)->fetchAll(PDO::FETCH_ASSOC);
+var_dump($hop);
 
 
 //  PDO'da dışarıdan (kullanıcıdan) alınan verilerin, SQL güvenlik açığına sebep olmadan sorguya dahil edilmesi için bir yöntemimiz var
