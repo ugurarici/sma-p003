@@ -2,42 +2,39 @@
 
 abstract class BaseModel
 {
-    protected $columns;
     protected $dbcon;
 
     public function __construct()
     {
+        $this->dbcon = new PDO('mysql:host=localhost;dbname=sma_p003_hello;charset=utf8mb4', 'root', 'root');
         foreach ($this->getColumns() as $column) {
             if (!isset($this->$column))
                 $this->$column = null;
         }
-        $this->dbcon = new PDO('mysql:host=localhost;dbname=sma_p003_hello;charset=utf8mb4', 'root', 'root');
     }
 
-    public function setColumns($cols)
-    {
-        $this->columns = $cols;
-    }
-
-    public function getTableName()
+    protected function getTableName()
     {
         if (isset($this->table)) return $this->table;
         return strtolower(static::class) . "s";
     }
 
-    public function getFillableColumns()
+    protected function getColumns()
+    {
+        if (isset($this->columns)) return $this->columns;
+        return $this->dbcon
+            ->query("DESCRIBE " . $this->getTableName())
+            ->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    protected function getFillableColumns()
     {
         return array_filter($this->getColumns(), function ($item) {
             return $item != "id";
         });
     }
 
-    public function getColumns()
-    {
-        return $this->columns;
-    }
-
-    public function getFillableArray()
+    protected function getFillableArray()
     {
         $array = [];
         foreach ($this->getFillableColumns() as $column) {
