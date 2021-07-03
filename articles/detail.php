@@ -1,8 +1,13 @@
 <?php
 require "inc/init.php";
 
-$articleId = handleArticleId();
-$article = getArticleDetail($articleId);
-$articles = getAllArticles();
+$article = Article::find($_GET['id']);
+
+if (!$article) {
+    header("Location: index.php");
+    die();
+}
+
+$articles = Article::all();
 
 include "views/detail.php";

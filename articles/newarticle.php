@@ -12,10 +12,15 @@ redirectIfNotLoggedIn();
 if (isset($_POST['title']) and isset($_POST['content'])) {
 
     //  articles dizisine yeni bir eleman ekliyoruz
-    $lastArticleId = createNewArticle($_POST['title'], $_POST['content']);
+    // $lastArticleId = createNewArticle($_POST['title'], $_POST['content']);
+
+    $article = new Article;
+    $article->title = $_POST['title'];
+    $article->content = $_POST['content'];
+    $article->save();
 
     //  burada işimiz bitti, son aritcle detayına gidelim
-    header("Location: detail.php?id=" . $lastArticleId);
+    header("Location: detail.php?id=" . $article->id);
 }
 
 include "views/newarticle.php";

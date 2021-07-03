@@ -5,4 +5,4 @@
 require_once "inc/init.php";
 
 //  rastgele seçilen id detayına yönlendirme yapalım
-header("Location: detail.php?id=" . getRandomArticleId());
+header("Location: detail.php?id=" . Article::find("random")->id);
