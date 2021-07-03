@@ -27,9 +27,7 @@ function redirectIfLoggedIn($page = "index.php")
 
 function handleArticleId()
 {
-    $articles = getAllArticles();
-
-    if (!isset($_REQUEST['id']) || !isset($articles[$_REQUEST['id']])) {
+    if (!isset($_REQUEST['id']) || !isArticleExists($_REQUEST['id'])) {
         header("Location: index.php");
         die();
     }
@@ -39,69 +37,65 @@ function handleArticleId()
 
 function getAllArticles()
 {
-    $articlesJson = file_get_contents('articles.json');
-    return json_decode($articlesJson, true);
+    global $database;
+
+    return $database->query("SELECT * FROM articles ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function isArticleExists($id)
+{
+    global $database;
+
+    $getDetailQuery = $database->prepare("SELECT id FROM articles WHERE id = ?");
+    $getDetailQuery->execute([$id]);
+
+    return $getDetailQuery->rowCount() > 0;
 }
 
 function getArticleDetail($id)
 {
-    $articles = getAllArticles();
-    return $articles[$id];
+    global $database;
+
+    $getDetailQuery = $database->prepare("SELECT * FROM articles WHERE id = ?");
+    $getDetailQuery->execute([$id]);
+
+    return $getDetailQuery->fetch(PDO::FETCH_ASSOC);
 }
 
 function createNewArticle($title, $content)
 {
-    $articles = getAllArticles();
+    global $database;
 
-    //  articles dizisine yeni bir eleman ekliyoruz
-    $articles[] = [
-        "title" => $title,
-        "content" => $content
-    ];
+    $insertQuery = $database->prepare("INSERT INTO articles (title, content) VALUES (:title, :content)");
 
-    //  articles dizisinin yeni halini JSON'a çeviriyoruz
-    $articlesJson = json_encode($articles);
+    $insertResult = $insertQuery->execute(
+        compact('title', 'content')
+    );
 
-    //  JSON'ın yeni halini dosyaya yazıyoruz
-    file_put_contents('articles.json', $articlesJson);
-
-    //  son article elemanının indisini alalım
-    return array_key_last($articles);
+    return $database->lastInsertId();
 }
 
-function editArticle($id, $newTitle, $newContent)
+function editArticle($id, $title, $content)
 {
-    $articles = getAllArticles();
+    global $database;
 
-    //  articles dizisindeki bir elemanı güncelliyoruz
-    $articles[$id] = [
-        "title" => $newTitle,
-        "content" => $newContent
-    ];
-
-    //  articles dizisinin yeni halini JSON'a çeviriyoruz
-    $articlesJson = json_encode($articles);
-
-    //  JSON'ın yeni halini dosyaya yazıyoruz
-    return file_put_contents('articles.json', $articlesJson);
+    $updateQuery = $database->prepare("UPDATE articles SET title=:title, content=:content WHERE id=:id");
+    return $updateQuery->execute(compact('id', 'title', 'content'));
 }
 
 function deleteArticle($id)
 {
-    $articles = getAllArticles();
+    global $database;
 
-    //  articles dizisinden istenen elemanı sileceğiz
-    unset($articles[$id]);
-
-    //  articles dizisinin yeni halini JSON'a çeviriyoruz
-    $articlesJson = json_encode($articles);
-
-    //  JSON'ın yeni halini dosyaya yazıyoruz
-    return file_put_contents('articles.json', $articlesJson);
+    $deleteQuery = $database->prepare("DELETE FROM articles WHERE id=:id");
+    return $deleteQuery->execute(compact('id'));
 }
 
 function getRandomArticleId()
 {
-    $articles = getAllArticles();
-    return array_rand($articles);
+    global $database;
+
+    $getRandId = $database->query("SELECT id FROM articles ORDER BY RAND() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+
+    return $getRandId['id'];
 }
