@@ -1,6 +1,6 @@
 <?php
 
-class Article extends BaseModel
+class Article extends Model
 {
     //
 }

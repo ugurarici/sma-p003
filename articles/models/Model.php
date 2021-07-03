@@ -1,6 +1,6 @@
 <?php
 
-abstract class BaseModel
+abstract class Model
 {
     protected $dbcon;
 

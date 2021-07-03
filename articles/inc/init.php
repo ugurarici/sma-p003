@@ -3,5 +3,5 @@
 session_start();
 require_once "functions.php";
 require_once "data.php";
-require_once "models/BaseModel.php";
+require_once "models/Model.php";
 require_once "models/Article.php";

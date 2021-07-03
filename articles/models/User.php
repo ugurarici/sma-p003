@@ -1,6 +1,6 @@
 <?php
 
-class User extends BaseModel
+class User extends Model
 {
     public $columns = ["id", "name", "email", "password"];
 }
