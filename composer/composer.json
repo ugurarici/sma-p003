@@ -1,0 +1,5 @@
+{
+    "require": {
+        "doctrine/inflector": "^2.0"
+    }
+}
