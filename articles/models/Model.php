@@ -6,7 +6,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->dbcon = new PDO('mysql:host=localhost;dbname=sma_p003_hello;charset=utf8mb4', 'root', 'root');
+        $this->dbcon = DBProvider::getInstance();
         foreach ($this->getColumns() as $column) {
             if (!isset($this->$column))
                 $this->$column = null;
