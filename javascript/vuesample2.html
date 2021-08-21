@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="postsLoading">Postlar yükleniyor...</div>
+      <ul v-else>
+        <li v-for="post in posts">
+          <a href="#" @click.prevent="showDetail(post.id)">
+            {{ post.title }}
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div v-if="detailLoading">içerik yükleniyor...</div>
+      <div v-if="detail!=null">
+        <h1>{{ detail.title }}</h1>
+        <p>{{ detail.content }}</p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Vue Basics",
+          postsLoading: true,
+          posts: [],
+          detail: null,
+          detailLoading: false,
+        },
+        mounted() {
+          fetch("http://blog.test/api/posts")
+            .then((response) => response.json())
+            .then((data) => {
+              this.posts = data.data;
+              this.postsLoading = false;
+            });
+        },
+        methods: {
+          showDetail: function (id) {
+            this.detailLoading = true;
+            fetch("http://blog.test/api/posts/" + id)
+              .then((response) => response.json())
+              .then((data) => {
+                this.detailLoading = false;
+                this.detail = data.data;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
